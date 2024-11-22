@@ -8,11 +8,11 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application files into the container
+# Copy the application files into the container (all files from your project, including the 'app' folder)
 COPY . /app/
 
 # Expose ports for REST (5000) and gRPC (50051)
 EXPOSE 5000 50051
 
 # Set the command to run the app
-CMD ["python", "app.py"]
+CMD ["python", "app/app.py"]

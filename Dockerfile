@@ -8,14 +8,17 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install PyTorch (or TensorFlow) for model inference
+RUN pip install torch
+
 # Copy the application files into the container (all files from your project, including the 'app' folder)
 COPY . /app/
 
-# Create cache directory and set permissions
+# Create cache directory and set permissions for Hugging Face model cache
 RUN mkdir -p /tmp/.cache/huggingface && \
     chmod -R 777 /tmp/.cache
 
-# Set environment variable
+# Set environment variable for Hugging Face cache
 ENV TRANSFORMERS_CACHE=/tmp/.cache/huggingface
 
 # Expose ports for REST (5000) and gRPC (50051)
